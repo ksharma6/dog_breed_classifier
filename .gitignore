@@ -1,0 +1,8 @@
+#ignore local files
+todo.md
+data/
+
+#ignore notebook extensions
+*.ipynb_checkpoints
+*__pycache__
+
