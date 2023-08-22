@@ -1,5 +1,8 @@
 import torch
 
+import matplotlib.pyplot as plt
+plt.style.use('ggplot')
+
 def calculate_channel_means(dataset, label):
     #calculates and returns per channel mean of dataset containing image data
     mean = 0
@@ -66,3 +69,42 @@ def train_model(model, dataloader,epochs, optimizer, criterion, device):
     return {"trained model": model,
             "acc per epoch": acc_per_epoch,
             "loss per epoch": loss_per_epoch}
+
+def model_check_cuda(model):
+    """
+    Raise error if model not on cuda
+    """
+    assert next(model.parameters()).is_cuda, "Model not on cuda device"
+
+def plot_loss(loss_scores:list, 
+              epochs:int, 
+              figsize:tuple = (5,5), 
+              title:str = None, 
+              font_dict:dict=None,
+              save_fig:bool= False,
+              path:str = None):
+
+    plt.plot(epochs, loss_scores)
+    plt.suptitle(title, fontdict=font_dict)
+    plt.xlabel('Epochs', fontdict=font_dict)
+    plt.ylabel('Loss', fontdict=font_dict)
+
+    if save_fig:
+        plt.savefig(path, bbox_inches='tight')
+
+def plot_acc(acc_scores:list, 
+            epochs:int, 
+            figsize:tuple = (5,5), 
+            title:str = None, 
+            font_dict:dict=None,
+            save_fig:bool= False,
+            path:str = None):
+
+    plt.plot(epochs, acc_scores)
+    plt.suptitle(title, fontdict=font_dict)
+    plt.xlabel('Epochs', fontdict=font_dict)
+    plt.ylabel('Accuracy %', fontdict=font_dict)
+
+    if save_fig:
+        plt.savefig(path, bbox_inches='tight')
+
