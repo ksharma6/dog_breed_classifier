@@ -1,7 +1,6 @@
-import torch, torchvision
 import matplotlib.pyplot as plt
-import os
-import random
+import torch
+import torchvision
 
 class ImageDataset:
     def __init__(self, root_directory, transform = None):
@@ -25,8 +24,8 @@ class ImageDataset:
         return sample
     
     def display_images(self, rows, cols, num_images, figsize, fontdict):
-        image_idxs = random.sample(range(20_000), num_images)
-
+        #image_idxs = random.sample(range(20_000), num_images)
+        image_idxs = range(num_images)
         for i, image_idx in enumerate(image_idxs):
             sample = self.__getitem__(image_idx)
             img = sample['image'].permute(1, 2,0)
@@ -39,3 +38,15 @@ class ImageDataset:
             plt.axis('off')
             plt.tight_layout()
             plt.imshow(img)
+
+class BDDataset:
+    def __init(self, root_directory, transform=None):
+        self.root = root_directory
+
+    def __len__(self):
+        pass
+
+    def __getitem__(self):
+        pass
+        
+        
