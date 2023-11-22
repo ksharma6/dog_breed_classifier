@@ -8,7 +8,7 @@ def calculate_channel_means(dataset, label):
     mean = 0
     n_images = dataset.__len__()
     for i in range(n_images):
-        mean += torch.mean(dataset.__getitem__(i)[label].float(), dim= [1,2])
+        mean += torch.mean(dataset.__getitem__(i)[label].type(torch.float), dim= [1,2])
     return mean/n_images
 
 def calculate_channel_sds(dataset, label):
